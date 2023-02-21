@@ -70,13 +70,13 @@ class Account:
 
     def __init__(self, id, account_id, is_open, transactions):
         self.id = id
-        self.account_id = account_id
-        self.is_open = is_open
-        self.transactions = transactions
+        self.account_id = f"{self.ACCOUNT_TYPE} ACCOUNT [{id}]"
+        self.is_open = True
+        self.transactions = []
 
 
     def get_is_open(self):
-        pass
+
 
     def get_current_balance(self, current_balance):
         Transaction(current_balance)
