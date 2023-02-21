@@ -68,30 +68,35 @@ class Account:
     """
     ACCOUNT_TYPE = "GET RICH QUICK ACCOUNT"
 
-    def __init__(self, id, account_id, is_open, transactions):
+    def __init__(self, id):
         self.id = id
         self.account_id = f"{self.ACCOUNT_TYPE} ACCOUNT [{id}]"
         self.is_open = True
         self.transactions = []
-
+        self.balance = 0
 
     def get_is_open(self):
-
+        return self.balance
 
     def get_current_balance(self, current_balance):
-        Transaction(current_balance)
-        return
+        pass
 
     def set_is_open(self, set_open):
         self.is_open = True
         return self.is_open
 
     def close_account(self, date):
+        if self.balance > 0:
+            pass
         self.is_open = False
         return date
 
     def perform_transaction(self, amount, transaction_type, date):
-        pass
+        print(self.get_is_open())
+        transaction = Transaction(amount, transaction_type, date, self.balance)
+        self.balance = transaction.get_balance_after_transaction()
+        self.transactions.append(transaction)
+
 
     def get_max_10_transactions(self):
         pass
