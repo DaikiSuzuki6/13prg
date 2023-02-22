@@ -76,14 +76,13 @@ class Account:
         self.balance = 0
 
     def get_is_open(self):
+        return self.is_open
+
+    def get_current_balance(self):
         return self.balance
 
-    def get_current_balance(self, current_balance):
-        pass
-
     def set_is_open(self, set_open):
-        self.is_open = True
-        return self.is_open
+        self.is_open = False
 
     def close_account(self, date):
         if self.balance > 0:
@@ -92,14 +91,24 @@ class Account:
         return date
 
     def perform_transaction(self, amount, transaction_type, date):
-        print(self.get_is_open())
         transaction = Transaction(amount, transaction_type, date, self.balance)
         self.balance = transaction.get_balance_after_transaction()
-        self.transactions.append(transaction)
+        if transaction_type == Transaction.WITHDRAWAL:
+            if self.balance - amount < 0:
+                self.is_open = False
+                return self.is_open
+            elif self.balance - amount >= 0:
+                self.is_open = True
+                return self.is_open
+        else:
+            self.transactions.append(transaction)
+            return self.get_is_open()
+
+
 
 
     def get_max_10_transactions(self):
-        pass
+        return "\n".join()
 
     def __str__(self):
         pass
