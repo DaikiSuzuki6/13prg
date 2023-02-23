@@ -86,7 +86,7 @@ class Account:
 
     def close_account(self, date):
         if self.balance > 0:
-            pass
+            Transaction(current_balance=0)
         self.is_open = False
         return date
 
@@ -100,11 +100,11 @@ class Account:
             elif self.balance - amount >= 0:
                 self.is_open = True
                 return self.is_open
+        if transaction_type == Transaction.DEPOSIT:
+            return self.is_open
         else:
             self.transactions.append(transaction)
             return self.get_is_open()
-
-
 
 
     def get_max_10_transactions(self):
