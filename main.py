@@ -1,5 +1,8 @@
 """
 BankClasses program. Simulates a bank/customers/accounts/transactions/dates
+
+Daiki Suzuki
+Total= -66
 """
 import doctest
 
@@ -9,11 +12,11 @@ class MyDate:
     A date object to represent a date
     """
     def __init__(self, day, month, year):
-        self.day = day
-        self.month = month
+        self.day = day  # -1
+        self.month = month  # -1
         self.year = year
 
-    def __str__(self):
+    def __str__(self):  # -1
         return f"{self.day}/{self.month}/{self.year}"
 
 
@@ -29,7 +32,7 @@ class Transaction:
     WITHDRAWAL = 1
     NO_TRANSACTION = 2
 
-    def __init__(self, amount, transaction_type, date, current_balance):
+    def __init__(self, amount, transaction_type, date, current_balance):  # -1
         self.amount = amount
         self.transaction_type = transaction_type
         if transaction_type == self.DEPOSIT:
@@ -44,10 +47,10 @@ class Transaction:
                 self._balance_after_transaction = current_balance - amount
 
         self.date = date
-        self.current_balance = current_balance
+        self.current_balance = current_balance  # -1
 
     def get_type_index(self):  # 0 = deposit, 1 = withdrawal, 2=no transaction
-        return self.transaction_type
+        return self.transaction_type  # -1
 
     def get_amount(self):
         return self.amount
@@ -60,6 +63,7 @@ class Transaction:
             return f"{self.date} {self.transaction_type} Balance: ${self._balance_after_transaction}"
         else:
             return f"{self.date} {self.transaction_type} ${self.amount} Balance: ${self._balance_after_transaction}"
+# -1
 
 
 class Account:
@@ -73,7 +77,7 @@ class Account:
         self.account_id = f"{self.ACCOUNT_TYPE} ACCOUNT [{id}]"
         self.is_open = True
         self.transactions = []
-        self.balance = 0
+        self.balance = 0  # -1
 
     def get_is_open(self):
         return self.is_open
@@ -82,11 +86,11 @@ class Account:
         return self.balance
 
     def set_is_open(self, set_open):
-        self.is_open = False
+        self.is_open = False  # -1
 
     def close_account(self, date):
         if self.balance > 0:
-            Transaction(current_balance=0)
+            Transaction(current_balance=0)  # -3
         self.is_open = False
         return date
 
@@ -101,17 +105,18 @@ class Account:
                 self.is_open = True
                 return self.is_open
         if transaction_type == Transaction.DEPOSIT:
+            self.is_open = True
             return self.is_open
         else:
             self.transactions.append(transaction)
-            return self.get_is_open()
-
+            return self.get_is_open()  # -2
 
     def get_max_10_transactions(self):
-        return "\n".join()
+        return "\n".join([f"{i+1} {item}" for i, item in enumerate(self.transactions[-10:])])
 
     def __str__(self):
-        pass
+        pass  # -3
+
 
 
 class Customer:
@@ -119,37 +124,39 @@ class Customer:
     Represents a customer of a bank. They only have 1 account.
     """
     def __init__(self, person_name, person_id, account_id):
-        pass
+        self.person_name = person_name  # -1
+        self.person_id = person_id
+        self.account_id = account_id
 
     def get_customer_id(self):
-        pass
+        return self.get_customer_id()  # -1
 
     def get_name(self):
-        pass
+        return self.person_name
 
     def get_account_balance(self):
-        pass
+        return self.account.get_current_balance()
 
     def has_an_open_account(self):
-        pass
+        return self.account.get_is_open()
 
     def close_account(self, date):
-        pass
+        return self.account.close_account()
 
     def open_account(self, date):
-        pass
+        pass  # -1
 
     def perform_transaction(self, amount, transaction_type, date):
-        pass
+        pass  # -1
 
     def get_max_10_transactions(self):
-        pass
+        pass  # -1
 
     def get_account_information(self):
-        pass
+        pass  # -1
 
     def __str__(self):
-        pass
+        pass  # -1
 
 
 class MyBank:
@@ -157,37 +164,39 @@ class MyBank:
     Represents a bank. Contains customers.
     """
     def __init__(self, name):
-        pass
+        pass  # -4
 
     def get_mydate_object(self):
-        pass
+        pass  # -2
 
     def deposit_funds(self, current_customer):
-        pass
+        pass  # -1
 
     def withdraw_funds(self, current_customer):
-        pass
+        pass  # -1
 
     def open_account(self, current_customer):
-        pass
+        pass  # -1
 
     def close_account(self, current_customer):
-        pass
+        pass  # -1
 
     def display_bank_summary(self):
-        pass
+        pass  # -5
 
     def display_account_information(self, customer):
-        pass
+        pass  # -1
 
     def display_welcome(self):
-        pass
+        pass  # -2
 
     def add_customer(self, customer):
-        pass
+        pass  # -1
 
     def remove_customer(self, customer):
-        pass
+        pass  # -1
+# -22 tests failed.
+
 
 def test_bank():
     """
