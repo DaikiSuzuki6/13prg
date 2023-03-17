@@ -3,7 +3,7 @@ from tkinter import *
 
 SCREEN_HEIGHT = 720
 SCREEN_WIDTH = 1280
-GRAVITY = 0.2  # Adjust this value to change the strength of gravity
+GRAVITY = 9.81  # Adjust this value to change the strength of gravity
 
 
 # Create Bird
